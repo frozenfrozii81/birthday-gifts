@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday 🎂</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    font-family:Arial, sans-serif;
+    color:white;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ff65c3 0%, transparent 25%),
+        radial-gradient(circle at 80% 80%, #725cff 0%, transparent 30%),
+        linear-gradient(135deg,#120b24,#281044,#10091d);
+}
+
+/* STARS */
+
+.stars{
+    position:fixed;
+    inset:0;
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:blink 2s infinite alternate;
+}
+
+@keyframes blink{
+    from{opacity:.2;}
+    to{opacity:1;}
+}
+
+/* CARD */
+
+.card{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:420px;
+    padding:35px 25px;
+    text-align:center;
+
+    background:rgba(255,255,255,.11);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:30px;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.5),
+        0 0 40px rgba(255,80,200,.15);
+
+    animation:cardIn 1s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* CAKE */
+
+.cake{
+    font-size:75px;
+    animation:cakeFloat 2s ease-in-out infinite;
+    filter:drop-shadow(0 0 18px #ff8bda);
+}
+
+@keyframes cakeFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+/* TEXT */
+
+.subtitle{
+    margin-top:12px;
+    font-size:12px;
+    letter-spacing:4px;
+    color:#ffb9e9;
+    text-transform:uppercase;
+}
+
+h1{
+    margin-top:12px;
+    font-size:48px;
+    line-height:1;
+
+    background:linear-gradient(
+        90deg,
+        #ffffff,
+        #ff9fe4,
+        #ffd2f3
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.name{
+    margin-top:12px;
+    font-size:28px;
+    font-weight:bold;
+    color:#ffd5f3;
+    text-shadow:0 0 15px rgba(255,130,220,.6);
+}
+
+.line{
+    width:80px;
+    height:3px;
+    margin:20px auto;
+    border-radius:10px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #ff8dde,
+        transparent
+    );
+}
+
+.message{
+    color:#eee;
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* BUTTON */
+
+button{
+    margin-top:25px;
+    padding:14px 25px;
+
+    border:none;
+    border-radius:50px;
+
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+
+    background:linear-gradient(
+        135deg,
+        #ff4fc9,
+        #8c5cff
+    );
+
+    box-shadow:
+        0 8px 25px rgba(230,70,200,.4);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+button:active{
+    transform:scale(.95);
+}
+
+/* SURPRISE */
+
+.surprise{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+
+    animation:showSurprise .7s ease;
+}
+
+@keyframes showSurprise{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* CONFETTI */
+
+.confetti{
+    position:fixed;
+    top:-20px;
+
+    width:9px;
+    height:14px;
+
+    z-index:20;
+    pointer-events:none;
+
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity:0;
+    }
+}
+
+/* BALLOONS */
+
+.balloon{
+    position:fixed;
+    bottom:-100px;
+
+    font-size:45px;
+
+    z-index:1;
+    pointer-events:none;
+
+    animation:balloonUp 8s linear forwards;
+}
+
+@keyframes balloonUp{
+    to{
+        transform:
+            translateY(-120vh)
+            translateX(50px);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:400px){
+
+    .card{
+        padding:28px 18px;
+    }
+
+    .cake{
+        font-size:65px;
+    }
+
+    h1{
+        font-size:40px;
+    }
+
+    .name{
+        font-size:25px;
+    }
+
+    .message{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- STARS -->
+<div class="stars" id="stars"></div>
+
+
+<!-- BIRTHDAY CARD -->
+
+<div class="card">
+
+    <div class="cake">🎂</div>
+
+    <div class="subtitle">
+        A Special Day For You
+    </div>
+
+    <h1>
+        Happy Birthday!
+    </h1>
+
+    <!-- CHANGE NAME HERE -->
+    <div class="name">
+        ✨ crackeyy ✨
+    </div>
+
+    <div class="line"></div>
+
+    <p class="message">
+
+        Wishing you a beautiful birthday
+        filled with happiness, laughter,
+        love and unforgettable memories. 💗
+
+        <br><br>
+
+        May every little dream of yours
+        come true and may your smile
+        stay forever. ✨🌸
+
+    </p>
+
+
+    <button onclick="celebrate()">
+        🎁 Open Your Surprise
+    </button>
+
+
+    <div class="surprise" id="surprise">
+
+        💖 You are truly special! 💖
+
+        <br><br>
+
+        🎈 Have the most amazing birthday ever! 🎈
+
+        <br><br>
+
+        ✨ Keep smiling. stay happy.stay blessed. ✨
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* CREATE STARS */
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 80; i++){
+
+    const star = document.createElement("div");
+
+    star.className = "star";
+
+    star.style.left =
+        Math.random() * 100 + "%";
+
+    star.style.top =
+        Math.random() * 100 + "%";
+
+    star.style.animationDelay =
+        Math.random() * 2 + "s";
+
+    stars.appendChild(star);
+}
+
+
+/* CELEBRATION */
+
+function celebrate(){
+
+    document.getElementById("surprise").style.display =
+        "block";
+
+
+    /* CONFETTI */
+
+    for(let i = 0; i < 180; i++){
+
+        const confetti =
+            document.createElement("div");
+
+        confetti.className =
+            "confetti";
+
+
+        const colors = [
+            "#ff4fc3",
+            "#ffd166",
+            "#7cf7ff",
+            "#ffffff",
+            "#a66cff",
+            "#ff7b7b",
+            "#62ff9b"
+        ];
+
+
+        confetti.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        confetti.style.left =
+            Math.random() * 100 + "vw";
+
+
+        confetti.style.animationDuration =
+            (Math.random() * 3 + 2) + "s";
+
+
+        confetti.style.animationDelay =
+            Math.random() * .5 + "s";
+
+
+        document.body.appendChild(confetti);
+
+
+        setTimeout(() => {
+            confetti.remove();
+        },6000);
+
+    }
+
+
+    /* BALLOONS */
+
+    for(let i = 0; i < 15; i++){
+
+        const balloon =
+            document.createElement("div");
+
+        balloon.className =
+            "balloon";
+
+
+        balloon.innerHTML =
+            ["🎈","💖","✨","🎀","🌸"]
+            [
+                Math.floor(
+                    Math.random() * 5
+                )
+            ];
+
+
+        balloon.style.left =
+            Math.random() * 100 + "vw";
+
+
+        balloon.style.animationDelay =
+            Math.random() * 2 + "s";
+
+
+        document.body.appendChild(balloon);
+
+
+        setTimeout(() => {
+            balloon.remove();
+        },10000);
+
+    }
+
+}
+
+
+/* SMALL CONFETTI ON PAGE LOAD */
+
+setTimeout(() => {
+
+    for(let i = 0; i < 40; i++){
+
+        const c =
+            document.createElement("div");
+
+        c.className =
+            "confetti";
+
+
+        const colors = [
+            "#ff4fc3",
+            "#ffd166",
+            "#7cf7ff",
+            "#ffffff"
+        ];
+
+
+        c.style.background =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        c.style.left =
+            Math.random() * 100 + "vw";
+
+
+        c.style.animationDuration =
+            (Math.random() * 3 + 3) + "s";
+
+
+        document.body.appendChild(c);
+
+
+        setTimeout(() => {
+            c.remove();
+        },6000);
+
+    }
+
+},800);
+
+</script>
+
+</body>
+</html>
